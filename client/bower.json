@@ -1,0 +1,23 @@
+{
+  "name": "WordPin",
+  "version": "0.0.1",
+  "homepage": "https://github.com/hokennethk/2015-06-mvp",
+  "authors": [
+    "Kenneth Ho <hokennethk@users.noreply.github.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.3",
+    "angular-ui-router": "~0.2.15"
+  }
+}
