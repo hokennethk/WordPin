@@ -1,7 +1,6 @@
 angular.module('wordpin', [
   'wordpin.game',
   'wordpin.services',
-  // 'wordpin.game.timer',
   'ui.router',
   'ui.bootstrap',
   'ngAnimate'
@@ -20,11 +19,6 @@ angular.module('wordpin', [
       url:'/game',
       templateUrl: 'app/templates/game.html',
       controller: 'GameController'
-    })
-    .state('game.timer', {
-      // url: '/game',
-      templateUrl:'app/templates/game.timer.html',
-      controller: 'TimerController'
     })
     .state('highscores', {
       url: '/highscores',

@@ -37,6 +37,7 @@ angular.module('wordpin.game', [])
     $scope.score = 0;
     $scope.validSubmissions = {};
     $scope.randword = ''
+    $scope.word = '';
 
     // Timer.startTimer();
     $scope.startTimer();
