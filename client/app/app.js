@@ -1,7 +1,7 @@
 angular.module('wordpin', [
   'wordpin.game',
   'wordpin.services',
-  'wordpin.game.timer',
+  // 'wordpin.game.timer',
   'ui.router',
   'ui.bootstrap',
   'ngAnimate'

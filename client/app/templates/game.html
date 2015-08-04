@@ -8,9 +8,6 @@
     <div class="score col-xs-6">
       <h2>Score: {{score}}</h2> <!-- Score -->
     </div>
-    <div class="shuffle-button col-xs-6">
-      <button class="btn btn-default btn-shuffle" ng-click="shuffleLetters(letterSet)">Shuffle </button>
-    </div>
   </div>
 
 
@@ -31,9 +28,14 @@
   <!-- Begin word-entry -->
   <!-- <div ng-show="timeleft" class="word-entry row"> -->
   <div class="word-entry row">
-    <form name="word-entry__form">
-      <input class="word-entry__input" name="word-entry" type="text" ng-model="word" ng-disabled="!timeleft">
-      <button ng-click="validWord(word)" class="btn btn-success btn-xs" ng-hide="true">Submit</button>
+    <form name="word-entry__form col-xs-10">
+      <input class="word-entry__input" name="word-entry" type="text" ng-model="word" ng-disabled="!timeleft" placeholder="Enter Word Here">
+      <div class="col-xs-6">
+      <button class="btn btn-success btn-alt" type="submit" ng-click="validWord(word)" ng-disabled="!timeleft">Submit</button>
+      </div>
+    <div class="col-xs-6">
+      <button class="btn btn-default btn-shuffle btn-alt" ng-click="shuffleLetters(letterSet)">Shuffle </button>
+    </div>
     </form>
   </div> <!-- End word-entry -->
 
