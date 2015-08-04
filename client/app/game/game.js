@@ -49,11 +49,17 @@ angular.module('wordpin.game', [])
     $interval.cancel(gameTimer);
   };
 
+  /****************************************
+    LETTERS
+  *****************************************/
+
   // generate a letterset
   $scope.generateLetterSet = function() {
     // $scope.letterSet = Letters.generateSet();
     $scope.randomWord();
   };
+
+  $scope.shuffleLetters = Letters.shuffleLetters;
 
 
   /****************************************
