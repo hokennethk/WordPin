@@ -3,7 +3,8 @@ angular.module('wordpin', [
   'wordpin.services',
   'ui.router',
   'ui.bootstrap',
-  'ngAnimate'
+  'ngAnimate',
+  'ngDialog'
   ])
 
 .config(function($stateProvider, $urlRouterProvider) {

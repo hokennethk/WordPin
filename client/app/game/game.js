@@ -1,6 +1,6 @@
 angular.module('wordpin.game', [])
 
-.controller('GameController', function ($scope, $interval, Game, Letters, Word) {
+.controller('GameController', function ($scope, $interval, Game, Letters, Word, ngDialog) {
 
   /****************************************
     PERSISTANT THROUGHOUT GAMES
@@ -33,7 +33,7 @@ angular.module('wordpin.game', [])
       $scope.stopTimer();
     }
     $scope.letterSet = [];
-    $scope.timeleft = 30;
+    $scope.timeleft = $scope.max;
     $scope.score = 0;
     $scope.validSubmissions = {};
     $scope.randword = ''
@@ -51,6 +51,7 @@ angular.module('wordpin.game', [])
       if ($scope.timeleft === 0) {
         console.log('game over');
         $scope.stopTimer();
+        $scope.modalOpen();
       }
     }, 1000);
   };
@@ -116,6 +117,21 @@ angular.module('wordpin.game', [])
     return result;
   };
 
+  /****************************************
+    MODAL
+  *****************************************/
+
+  $scope.modalOpen = function() {
+    ngDialog.open({
+      // template: 'firstDialog',
+      template: './app/templates/modal.html',
+      scope: $scope,
+      className: 'ngdialog-theme-default',
+      closeByDocument: false
+    });
+  };
+
   // initialize game
   $scope.loadDict();
 });
+
