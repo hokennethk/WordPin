@@ -4,8 +4,15 @@
   <div class="new-game row">
     <button class="btn btn-primary btn-start" name="start" ng-click="startGame()" ng-show="dict">New Game</button>
   </div>
+  <div class="row game-header">
+    <div class="score col-xs-6">
+      <h2>Score: {{score}}</h2> <!-- Score -->
+    </div>
+    <div class="shuffle-button col-xs-6">
+      <button class="btn btn-default btn-shuffle" ng-click="shuffleLetters(letterSet)">Shuffle </button>
+    </div>
+  </div>
 
-  <h2>Score: {{score}}</h2> <!-- Score -->
 
   <!-- progress bar -->
   <div class="row">
@@ -32,7 +39,7 @@
 
 
   <div class="row words-entered"> <!-- Begin words entered -->
-  <h3>Words Entered:</h3>
+  <h3>Valid Words Entered:</h3>
     <ul class="words-entered__list col-md-12">
       <li class="words-entered__item" ng-repeat="word in validSubmissions">{{ word }}</li>
     </ul>
