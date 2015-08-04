@@ -1,40 +1,76 @@
 angular.module('wordpin.game', [])
 
-.controller('GameController', function ($scope, Game, Letters) {
+.controller('GameController', function ($scope, $interval, Game, Letters, Word) {
+  var gameTimer;
 
-  $scope.initialize = function() {
-    $scope.letterSet = [];
-    $scope.score = 0;
-    $scope.validSubmissions = {};
+  $scope.loadDict = function() {
+    // $scope.stopTimer();
+    // load dictionary if needed
     if (!$scope.dict) {
       Game.getValidWords().then(function(wordList) {
         $scope.dict = wordList.data;
       });
     }
 
-    $scope.generateLetterSet();
-    $scope.randword = ''
   };
 
+
+  /****************************************
+    GAME
+  *****************************************/
+  $scope.startGame = function() {
+    // game variables
+    if (gameTimer) {
+      $scope.stopTimer();
+    }
+    $scope.letterSet = [];
+    $scope.timeleft = 10;
+    $scope.score = 0;
+    $scope.validSubmissions = {};
+    $scope.randword = ''
+
+    $scope.startTimer();
+    $scope.generateLetterSet();
+  };
+
+  $scope.startTimer = function() {
+    gameTimer = $interval(function() {
+      $scope.timeleft -= 1;
+      if ($scope.timeleft === 0) {
+        console.log('game over');
+        $scope.stopTimer();
+      }
+    }, 1000);
+  };
+
+  $scope.stopTimer = function() {
+    $interval.cancel(gameTimer);
+  };
 
   // generate a letterset
   $scope.generateLetterSet = function() {
     $scope.letterSet = Letters.generateSet();
   };
 
+
+  /****************************************
+    CHECK WORD
+  *****************************************/
   $scope.checkSubset = function(input, letters) {
     input = input.split('');
     return Game.checkSubset(input, letters);
   };
 
   $scope.validWord = function(word) {
-    // console.log($scope.dict);
     var result =  !$scope.validSubmissions[word] &&
                   Game.checkSubset(word.split(''), $scope.letterSet) &&
                   Game.testWord(word, $scope.dict)
-    if (result) {$scope.validSubmissions[word] = word;}
+    if (result) {
+      $scope.validSubmissions[word] = word;
+      $scope.score += Word.calculateScore(word);
+    }
     $scope.word = '';
-    console.log(result);
+    console.log($scope.score);
     return result;
   };
 
@@ -56,5 +92,5 @@ angular.module('wordpin.game', [])
 
 
   // initialize game
-  $scope.initialize();
+  $scope.loadDict();
 });
