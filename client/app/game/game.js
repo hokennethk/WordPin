@@ -126,8 +126,8 @@ angular.module('wordpin.game', [])
       // template: 'firstDialog',
       template: './app/templates/modal.html',
       scope: $scope,
-      className: 'ngdialog-theme-default',
-      closeByDocument: false
+      className: 'ngdialog-theme-default'
+      // closeByDocument: false
     });
   };
 
