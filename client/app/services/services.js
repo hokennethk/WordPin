@@ -42,25 +42,33 @@ angular.module('wordpin.services', [])
     return maxLetters - numVowels;
   };
 
-  var generateSet = function () {
-    var vowelsArr = [];
-    var consonantArr = [];
-    var numVowels = generateNumVowels();
-    var numConsonants = generateNumConsonants(numVowels);
-
-    // get random vowels
-    for (var i=0; i<numVowels; i++) {
-      var rand = Math.floor(Math.random() * vowels.length);
-      vowelsArr.push(vowels[rand]);
+  var generateSet = function (keys) {
+    var randword = '';
+    while (randword.length < 12) {
+      var index = Math.floor(Math.random() * keys.length);
+      randword = keys[index];
     }
+    // $scope.randword = randword;
+    // $scope.letterSet = randword.split('')
+    return randword.split('');
+    // var vowelsArr = [];
+    // var consonantArr = [];
+    // var numVowels = generateNumVowels();
+    // var numConsonants = generateNumConsonants(numVowels);
 
-    // get random consonants
-    for (var i=0; i<numConsonants; i++) {
-      var rand = Math.floor(Math.random() * consonants.length);
-      consonantArr.push(consonants[rand]);
-    }
+    // // get random vowels
+    // for (var i=0; i<numVowels; i++) {
+    //   var rand = Math.floor(Math.random() * vowels.length);
+    //   vowelsArr.push(vowels[rand]);
+    // }
 
-    return (vowelsArr.concat(consonantArr));
+    // // get random consonants
+    // for (var i=0; i<numConsonants; i++) {
+    //   var rand = Math.floor(Math.random() * consonants.length);
+    //   consonantArr.push(consonants[rand]);
+    // }
+
+    // return (vowelsArr.concat(consonantArr));
   };
 
   // -> Fisher–Yates shuffle algorithm

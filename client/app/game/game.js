@@ -1,9 +1,17 @@
 angular.module('wordpin.game', [])
 
 .controller('GameController', function ($scope, $interval, Game, Letters, Word) {
+
+  /****************************************
+    PERSISTANT THROUGHOUT GAMES
+  *****************************************/
   var gameTimer;
   $scope.timeleft = 0;
   $scope.max = 30;
+  $scope.arrOfWords = [];
+  // $scope.random = function(){
+  //   return 0.5 - Math.random();
+  // };
 
   $scope.loadDict = function() {
     $scope.stopTimer();
@@ -11,6 +19,7 @@ angular.module('wordpin.game', [])
     if (!$scope.dict) {
       Game.getValidWords().then(function(wordList) {
         $scope.dict = wordList.data;
+        $scope.arrOfWords = Object.keys($scope.dict);
       });
     }
   };
@@ -55,8 +64,8 @@ angular.module('wordpin.game', [])
 
   // generate a letterset
   $scope.generateLetterSet = function() {
-    // $scope.letterSet = Letters.generateSet();
-    $scope.randomWord();
+    $scope.letterSet = Letters.generateSet($scope.arrOfWords);
+    Letters.shuffleLetters($scope.letterSet);
   };
 
   $scope.shuffleLetters = Letters.shuffleLetters;
@@ -105,23 +114,6 @@ angular.module('wordpin.game', [])
     console.log($scope.score);
     return result;
   };
-
-  // maybe use this to generate letter set....
-  $scope.randomWord = function() {
-    var randword = '';
-    var keys = Object.keys($scope.dict);
-    while (randword.length < 12) {
-      console.log('keys', keys.length)
-      var index = Math.floor(Math.random() * keys.length);
-      console.log('index', index)
-      randword = keys[index];
-      console.log('randword', randword)
-    }
-    $scope.randword = randword;
-    $scope.letterSet = randword.split('')
-    return randword;
-  }
-
 
   // initialize game
   $scope.loadDict();
