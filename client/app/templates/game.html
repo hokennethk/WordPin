@@ -1,7 +1,8 @@
 <a ui-sref="game"></a>
 
 <div class="game">
-  <button name="start" ng-click="initialize()">Start Game</button>
+  <button name="start" ng-click="startGame()" ng-show="dict">Start Game</button>
+  <p>{{ timeleft }}</p>
   <div class="letters">
     <ul class="letters-list">
       <li class="letters-list__entry"ng-repeat="letter in letterSet track by $index">{{ letter }}</li>
