@@ -1,20 +1,26 @@
 <a ui-sref="game"></a>
 
 <div class="game">
-<button name="start">Start Game</button>
-<div class="letters">
-  <ul>
-    <li ng-repeat="letter in letterSet track by $index">{{ letter }}</li>
-  </ul>
-</div>
-<div>
-  <form name="word-entry-form">
-    <input name="word-entry" type="text" ng-model="word">
-    <button>Submit</button>
-  </form>
-</div>
+  <button name="start" ng-click="initialize()">Start Game</button>
+  <div class="letters">
+    <ul class="letters-list">
+      <li class="letters-list__entry"ng-repeat="letter in letterSet track by $index">{{ letter }}</li>
+    </ul>
+  </div>
+  <div>
+    <form name="word-entry-form">
+      <input name="word-entry" type="text" ng-model="word">
+      <button ng-click="validWord(word)">Submit</button>
+    </form>
+  </div>
+
+  <div>
+  <h3>Words Entered:</h3>
+    <ul>
+      <li ng-repeat="word in validSubmissions">{{ word }}</li>
+    </ul>
+  </div>
 </div>
 
 
-<button ng-click="generateLetterSet()"> generate letter set </button>
-<button ng-click="test(word)"> TEST </button>
+<button ng-click="randomWord()"> {{ randomWord }} </button>

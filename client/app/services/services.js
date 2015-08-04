@@ -77,13 +77,50 @@ angular.module('wordpin.services', [])
     });
   };
 
+  var checkSubset = function(arr1, arr2) {
+    // if (array === undefined || !Array.isArray(array)) {
+    //   return null;
+    // }
+    var superMap = {};
+    var result = true;
+
+    // map superset
+    arr2.forEach(function(item) {
+      if (!superMap[item]) {
+        superMap[item] = 0;
+      }
+      superMap[item] += 1;
+    });
+
+    // check if subset item in superset map
+    for (var i=0; i<arr1.length; i++) {
+      var item = arr1[i];
+      if (!superMap.hasOwnProperty(item)) {
+        return false;
+      } else {
+        superMap[item] -= 1;
+        if (superMap[item] < 0) {
+          return false;
+        }
+      }
+    }
+    // arr1.forEach(function(item) {
+    //   if (!superMap.hasOwnProperty(item)) {
+    //     result = false;
+    //   } else {
+    //     superMap[item] -= 1;
+    //   }
+    // });
+    return result;
+  };
+
   var testWord = function (word, wordList) {
     return !!wordList[word];
-  }
-
+  };
 
   return {
     getValidWords : getValidWords,
+    checkSubset   : checkSubset,
     testWord      : testWord
   }
 });
