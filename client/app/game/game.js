@@ -2,18 +2,18 @@ angular.module('wordpin.game', [])
 
 .controller('GameController', function ($scope, $interval, Game, Letters, Word) {
   var gameTimer;
+  $scope.timeleft = 0;
+  $scope.max = 30;
 
   $scope.loadDict = function() {
-    // $scope.stopTimer();
+    $scope.stopTimer();
     // load dictionary if needed
     if (!$scope.dict) {
       Game.getValidWords().then(function(wordList) {
         $scope.dict = wordList.data;
       });
     }
-
   };
-
 
   /****************************************
     GAME
@@ -24,11 +24,12 @@ angular.module('wordpin.game', [])
       $scope.stopTimer();
     }
     $scope.letterSet = [];
-    $scope.timeleft = 10;
+    $scope.timeleft = 30;
     $scope.score = 0;
     $scope.validSubmissions = {};
     $scope.randword = ''
 
+    // Timer.startTimer();
     $scope.startTimer();
     $scope.generateLetterSet();
   };
@@ -36,6 +37,7 @@ angular.module('wordpin.game', [])
   $scope.startTimer = function() {
     gameTimer = $interval(function() {
       $scope.timeleft -= 1;
+      $scope.updateTimerBar();
       if ($scope.timeleft === 0) {
         console.log('game over');
         $scope.stopTimer();
@@ -49,7 +51,31 @@ angular.module('wordpin.game', [])
 
   // generate a letterset
   $scope.generateLetterSet = function() {
-    $scope.letterSet = Letters.generateSet();
+    // $scope.letterSet = Letters.generateSet();
+    $scope.randomWord();
+  };
+
+
+  /****************************************
+    TIMER
+  *****************************************/
+  $scope.updateTimerBar = function() {
+    var type;
+    if ($scope.timeleft < 10) {
+      type = 'danger';
+      // type = 'success';
+    } else if ($scope.timeleft < 20) {
+      type = 'warning';
+      // type = 'info';
+    } else if ($scope.timeleft < 30) {
+      type = 'success';
+      // type = 'warning';
+    } else {
+      type = 'success';
+    }
+
+    // $scope.dynamic = $scope.timeleft;
+    $scope.type = type;
   };
 
 
