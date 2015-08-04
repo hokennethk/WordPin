@@ -125,3 +125,35 @@ angular.module('wordpin.services', [])
     testWord      : testWord
   }
 });
+// .factory('Timer', function($interval) {
+
+//   var gameTimer;
+//   var timeleft = 0;
+//   var startTimer = function() {
+//     if (gameTimer) {
+//       stopTimer();
+//     }
+//     timeleft = 30;
+//     gameTimer = $interval(function() {
+//       timeleft -= 1;
+//       if (timeleft === 0) {
+//         console.log('game over');
+//         stopTimer();
+//       }
+//     }, 1000);
+//   };
+
+//   var stopTimer = function() {
+//     $interval.cancel(gameTimer);
+//   };
+
+//   var getTime = function() {
+//     return timeleft;
+//   };
+
+//   return {
+//     getTime    : getTime,
+//     startTimer : startTimer,
+//     stopTimer  : stopTimer
+//   };
+// });
