@@ -8,10 +8,11 @@ angular.module('wordpin.services', [])
     else if (word.length === 3) { score += 3; }
     else if (word.length === 4) { score += 5; }
     else if (word.length === 5) { score += 8; }
-    else if (word.length === 6) { score += 13; }
-    else if (word.length === 7) { score += 21; }
-    else if (word.length === 8) { score += 34; }
-    else if (word.length >= 9) { score += 55; }
+    else if (word.length === 6) { score += 12; }
+    else if (word.length === 7) { score += 17; }
+    else if (word.length === 8) { score += 23; }
+    else if (word.length >= 9) { score += 30; }
+    return score;
   };
 
   var verifyWord = function(word) {
