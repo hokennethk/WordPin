@@ -34,3 +34,6 @@ bower_components/
 .floo
 .flooignore
 .DS_Store
+
+# private 
+resources/
